@@ -1,0 +1,217 @@
+1K
+MySQL Command
+select round(sum(total_price),2)
+from orders.order
+where payment_method = 'PayPal';
+MongoDB
+db["order"].aggregate([{$match:{$payment_method:"PayPal"}},{$group:{_id:null,total:{"$total_price"}}}]);
+or
+db.order.aggregate([{$match:{$payment_method:"PayPal"}},{$group:{_id:null,total:{"$total_price"}}}]);
+Create Index
+MySQL
+create index idx_payment_method
+on orders.order(payment_method(25));
+MongDB
+db["order"].createIndex({payment_method:1});
+or
+db.order.createIndex({payment_method:1});
+
+10K
+MySQL Command
+select round(sum(total_price),2)
+from orders.orders
+where payment_method = 'PayPal';
+MongoDB
+db["orders"].aggregate([{$match:{$payment_method:"PayPal"}},{$group:{_id:null,total:{"$total_price"}}}]);
+or
+db.orders.aggregate([{$match:{$payment_method:"PayPal"}},{$group:{_id:null,total:{"$total_price"}}}]);
+Create Index
+MySQL
+create index idx_payment_method
+on orders.orders(payment_method(25));
+MongDB
+db["orders"].createIndex({payment_method:1});
+or
+db.orders.createIndex({payment_method:1});
+
+1K
+MySQL
+select count(*)
+from orders.order
+where payment_method = 'PayPal';
+MongoDB
+db["order"].countDocuments({payment_method:"PayPal"});
+or
+db.order.countDocuments({payment_method:"PayPal"});
+Create Index
+MySQL
+create index idx_payment_method
+on orders.order(payment_method(25));
+MongDB
+db["order"].createIndex({payment_method:1});
+or
+db.order.createIndex({payment_method:1});
+
+10K
+MySQL
+select count(*)
+from orders.orders
+where payment_method = 'PayPal';
+MongoDB
+db["orders"].countDocuments({payment_method:"PayPal"});
+or
+db.orders.countDocuments({payment_method:"PayPal"});
+Create Index
+MySQL
+create index idx_payment_method
+on orders.orders(payment_method(25));
+MongDB
+db["orders"].createIndex({payment_method:1});
+or
+db.orders.createIndex({payment_method:1});
+
+1K
+MySQL
+select payment_method, round(sum(total_price),2) as total_sales
+from orders.order
+group by payment_method;
+MongoDB
+db["order"].aggregate([{$group:{_id:"$payment_method",total_sales:{$sum:"$total_price"}}}]);
+or
+db.order.aggregate([{$group:{_id:"$payment_method",total_sales:{$sum:"$total_price"}}}]);
+Create Index
+MySQL
+create index idx_payment_method
+on orders.order(payment_method(25));
+MongDB
+db["order"].createIndex({payment_method:1});
+or
+db.order.createIndex({payment_method:1});
+
+10K
+MySQL
+select payment_method, round(sum(total_price),2) as total_sales
+from orders.orders
+group by payment_method;
+MongoDB
+db["orders"].aggregate([{$group:{_id:"$payment_method",total_sales:{$sum:"$total_price"}}}]);
+or
+db.orders.aggregate([{$group:{_id:"$payment_method",total_sales:{$sum:"$total_price"}}}]);
+Create Index
+MySQL
+create index idx_payment_method
+on orders.orders(payment_method(25));
+MongDB
+db["orders"].createIndex({payment_method:1});
+or
+db.orders.createIndex({payment_method:1});
+
+1K
+MySQL
+explain analyze
+select * from orders.order
+where payment_method = 'PayPal';
+MongoDB
+db["order"].find({payment_method:"PayPal"}).explain("executionStats");
+or
+db.order.find({payment_method:"PayPal"}).explain("executionStats");
+Create Index
+MySQL
+create index idx_payment_method
+on orders.order(payment_method(25));
+MongDB
+db["order"].createIndex({payment_method:1});
+or
+db.order.createIndex({payment_method:1});
+
+10K
+MySQL
+explain analyze
+select * from orders.orders
+where payment_method = 'PayPal';
+MongoDB
+db["orders"].find({payment_method:"PayPal"}).explain("executionStats");
+or
+db.orders.find({payment_method:"PayPal"}).explain("executionStats");
+Create Index
+MySQL
+create index idx_payment_method
+on orders.orders(payment_method(25));
+MongDB
+db["orders"].createIndex({payment_method:1});
+or
+db.orders.createIndex({payment_method:1});
+
+1K
+MySQL
+explain analyze
+select * from orders.order
+where order_date between '2020-02-15' and '2020-03-04';
+MongoDB
+db["order"].find({order_date:{$gte:ISODate("2020-02-15"),$lte:ISODate("2020-03-04")}}).explain("executionStats");
+or
+db.order.find({order_date:{$gte:ISODate("2020-02-15"),$lte:ISODate("2020-03-04")}}).explain("executionStats");
+Create Index
+MySQL
+create index idx_order_date
+on orders.order(order_date);
+MongoDB
+db["order"].createIndex({order_date:1});
+or
+db.order.createIndex({order_date:1});
+
+10K
+MySQL
+explain analyze
+select * from orders.orders
+where order_date between '2020-02-15' and '2020-03-04';
+MongoDB
+db["orders"].find({order_date:{$gte:ISODate("2020-02-15"),$lte:ISODate("2020-03-04")}}).explain("executionStats");
+or
+db.orders.find({order_date:{$gte:ISODate("2020-02-15"),$lte:ISODate("2020-03-04")}}).explain("executionStats");
+Create Index
+MySQL
+create index idx_order_date
+on orders.orders(order_date);
+MongoDB
+db["orders"].createIndex({order_date:1});
+or
+db.orders.createIndex({order_date:1});
+
+1K
+MySQL
+explain analyze
+select payment_method, round(sum(total_price),2) as total_sales
+from orders.order
+group by payment_method;
+MongoDB
+db["order"].aggregate([{$group:{_id:"$payment_method",total_sales:{$sum:"$total_price"}}}]).explain("executionStats");
+or
+db.order.aggregate([{$group:{_id:"$payment_method",total_sales:{$sum:"$total_price"}}}]).explain("executionStats");
+Create Index
+MySQL
+create index idx_payment_method
+on orders.order(payment_method(25));
+MongDB
+db["order"].createIndex({payment_method:1});
+or
+db.order.createIndex({payment_method:1});
+
+10K
+MySQL
+explain analyze
+select payment_method, round(sum(total_price),2) as total_sales
+from orders.orders
+group by payment_method;
+MongoDB
+db["orders"].aggregate([{$group:{_id:"$payment_method",total_sales:{$sum:"$total_price"}}}]).explain("executionStats");
+or
+db.orders.aggregate([{$group:{_id:"$payment_method",total_sales:{$sum:"$total_price"}}}]).explain("executionStats");
+Create Index
+MySQL
+create index idx_payment_method
+on orders.orders(payment_method(25));
+MongDB
+db["orders"].createIndex({payment_method:1});
+or
+db.orders.createIndex({payment_method:1});
